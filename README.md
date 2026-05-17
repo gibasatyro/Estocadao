@@ -1,46 +1,52 @@
-This is a Kotlin Multiplatform project targeting Android, Server.
+# Estocadão API 📦
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Este é o backend do sistema Estocadão, desenvolvido em Kotlin Multiplatform (KMP) utilizando o framework Ktor para o servidor HTTP e Supabase para persistência de dados.
 
-* [/server](./server/src/main/kotlin) is for the Ktor server application.
-
-* [/shared](./shared/src) is for the code that will be shared between all targets in the project.
-  The most important subfolder is [commonMain](./shared/src/commonMain/kotlin). If preferred, you
-  can add code to the platform-specific folders here too.
-
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
-
-### Build and Run Server
-
-To build and run the development version of the server, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :server:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :server:run
-  ```
+Atividade desenvolvida para a disciplina de Laboratório de Desenvolvimento Multiplataforma.
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Tecnologias 
+
+* Kotlin Multiplatform (KMP)
+* Ktor Server (Engine Netty)
+* Supabase (Postgrest-kt)
+* Kotlinx Serialization (JSON)
+
+---
+
+## Estrutura do Projeto 
+
+O projeto segue a divisão responsabilidades exigida no enunciado:
+* `/shared` - Contém os modelos de dados comuns (`Product`, `StockItem`, `StockSummary`) e a lógica de serialização compartilhada.
+* `/server` - Contém a aplicação do servidor Ktor, incluindo a injeção de dependências do Supabase e as rotas de API (`ProductRoutes`, `StockRoutes`).
+* `/composeApp` - Espaço reservado para o desenvolvimento da interface e telas da aplicação Compose Multiplatform.
+
+---
+
+## Endpoints 
+
+### Produtos (`/products`)
+* `GET /products` - Listar todos os produtos
+* `GET /products/{id}` - Buscar um produto pelo ID
+* `POST /products` - Cadastrar um novo produto (Recebe JSON)
+* `PUT /products/{id}` - Atualizar os dados de um produto
+* `DELETE /products/{id}` - Remover um produto
+
+### Estoque (`/stock`)
+* `GET /stock` - Listar todos os itens de estoque
+* `GET /stock/{id}` - Buscar um item de estoque pelo ID
+* `POST /stock` - Adicionar um item ao estoque (Recebe JSON)
+* `PUT /stock/{id}` - Atualizar um item do estoque
+* `DELETE /stock/{id}` - Remover um item do estoque
+
+### Sumário (`/stock/summary`)
+* `GET /stock/summary` - Retorna a quantidade total agregada de cada produto em estoq
+* 
+
+## Como Configurar e Executar Localmente
+
+### 1. Clonar o Repositório
+```shell
+git clone [https://github.com/gibasatyro/Estocadao.git](https://github.com/gibasatyro/Estocadao.git)
+cd Estocadao
